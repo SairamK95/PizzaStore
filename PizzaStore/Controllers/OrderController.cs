@@ -66,6 +66,22 @@ namespace PizzaStore.Controllers
             }
         }
 
+
+        [HttpPut("{id}")]
+        public IActionResult EditOrder(int id,[FromBody] Order orderModel)
+        {
+            try
+            {
+                orderModel.OrderId = id;
+                var model = _orderService.SaveOrder(orderModel);
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         // DELETE api/<OrderController>/5
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(int id)
